@@ -2129,6 +2129,7 @@ const menuitem_t menu_format3[] = {
   { MT_ADV_CALLBACK, F_S11|TRC_Xp,     "PARALLEL X", menu_format_acb },
   { MT_ADV_CALLBACK, F_S11|TRC_Cp,     "PARALLEL C", menu_format_acb },
   { MT_ADV_CALLBACK, F_S11|TRC_Lp,     "PARALLEL L", menu_format_acb },
+  { MT_ADV_CALLBACK, F_S11|TRC_PWR,    "PWR ACCEPT", menu_format_acb },
   { MT_NEXT, 0, NULL, menu_back } // next-> menu_back
 };
 

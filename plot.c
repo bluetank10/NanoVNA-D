@@ -514,6 +514,16 @@ static float swr(int i, const float *v) {
   return (1.0f + x)/(1.0f - x);
 }
 
+
+//**************************************************************************************
+// Power accepted by the load, in percent (Warnick Lab)
+// PWR = 100 * (1 - |S|^2)
+//**************************************************************************************
+static float power_accepted(int i, const float *v) {
+  (void) i;
+  float s2 = v[0]*v[0] + v[1]*v[1];
+  return 100.0f * (1.0f - s2);
+}
 //**************************************************************************************
 // Z parameters calculations from complex S
 // Z = z0 * (1 + S) / (1 - S) = R + jX
@@ -716,7 +726,7 @@ static inline void cartesian_scale(const float *v, int16_t *xp, int16_t *yp, flo
   *yp = y;
 }
 
-#if MAX_TRACE_TYPE != 30
+#if MAX_TRACE_TYPE != 31
 #error "Redefined trace_type list, need check format_list"
 #endif
 
@@ -752,6 +762,7 @@ const trace_info_t trace_info_list[MAX_TRACE_TYPE] = {
 [TRC_Xsh]    = {"Xsh",    "%.3F%s", S_DELTA "%.3F%s", S_OHM,    NGRIDY/2, 100.0f, s21shunt_x           },
 [TRC_Zsh]    = {"|Zsh|",  "%.3F%s", S_DELTA "%.3F%s", S_OHM,    NGRIDY/2, 100.0f, s21shunt_z           },
 [TRC_Qs21]   = {"Q",      "%.4f%s", S_DELTA "%.3f%s", "",              0,  10.0f, s21_qualityfactor    },
+[TRC_PWR]    = {"PWR",    "%.2f%s", S_DELTA "%.2f%s", "%",             0, 12.5f,  power_accepted       },
 };
 
 const marker_info_t marker_info_list[MS_END] = {

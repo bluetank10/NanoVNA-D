@@ -822,7 +822,7 @@ enum {
 #define MAX_PALETTE     32
 
 // trace 
-#define MAX_TRACE_TYPE 30
+#define MAX_TRACE_TYPE 31
 enum trace_type {
   TRC_LOGMAG=0, TRC_PHASE, TRC_DELAY, TRC_SMITH, TRC_POLAR, TRC_LINEAR, TRC_SWR, TRC_REAL, TRC_IMAG,
   TRC_R, TRC_X, TRC_Z, TRC_ZPHASE,
@@ -832,7 +832,8 @@ enum trace_type {
   TRC_Q,
   TRC_Rser, TRC_Xser, TRC_Zser,
   TRC_Rsh, TRC_Xsh, TRC_Zsh,
-  TRC_Qs21
+  TRC_Qs21, 
+  TRC_PWR // Warnick's lab: % of power accepted by the load
 };
 
 // Mask for define rectangular plot
@@ -844,7 +845,8 @@ enum trace_type {
                               |(1<<TRC_Q)\
                               |(1<<TRC_Rser)|(1<<TRC_Xser)|(1<<TRC_Zser)\
                               |(1<<TRC_Rsh)|(1<<TRC_Xsh)|(1<<TRC_Zsh)\
-                              |(1<<TRC_Qs21))
+                              |(1<<TRC_Qs21)|(1<<TRC_PWR))
+                              //  Warnick's lab: added |(1<<TRC_PWR)
 
 // complex graph type (polar / smith / admit)
 #define ROUND_GRID_MASK       ((1<<TRC_POLAR)|(1<<TRC_SMITH))
@@ -1437,3 +1439,4 @@ int plot_printf(char *str, int, const char *fmt, ...);
 #define define_to_STR(x)  STR1(x)
 #define SWAP(type, x, y) {type t = x; x=y; y=t;}
 /*EOF*/
+
